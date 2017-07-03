@@ -8,7 +8,7 @@ class Search extends React.Component {
 		return (
 			<div>
 				<form onSubmit=''>
-					<input type='text' placeholder='Search here' ref='search' />
+					<input type='text' placeholder='Enter movie title here' ref='search' />
 				</form>
 			</div>
 		);
