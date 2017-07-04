@@ -48,8 +48,8 @@ export function fetchMovies(movies){
 	return(dispatch) => {
 		dispatch(getMovies(movies));
 		return fetch(`http://www.omdbapi.com/?apikey= 20dac387&s=${title}`).then(response => response.json())
-		.then(data => dispatch(receiveMovies(data)))
-		.catch(err=> dispatch(failedToFetch(err)));
+			.then(data => dispatch(receiveMovies(data)))
+			.catch(err=> dispatch(failedToFetch(err)));
 	}
 }
 
