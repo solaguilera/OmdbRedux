@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import {Link, IndexLink} from 'react-router';
 import FavButton from './favbutton.jsx';
 
-export default class MoviePreview extends Component {
-	constructor (props, context) {
-		super(props, context)
+export default class MoviePreview extends React.Component {
+	constructor (props) {
+		super(props)
 	}
 	render() {
 		return (

@@ -1,5 +1,6 @@
 import React from "react";
 import NavBarGuest from './navbarguest.jsx'
+import Home from '../components/home.jsx';
 
 class Main extends React.Component{
 	constructor(props){
@@ -9,7 +10,7 @@ class Main extends React.Component{
 		return(
 			<div>
 				<NavBarGuest />
-				<h1>Que te Recontra, buscá la película</h1>
+				<Home />
 				{React.cloneElement(this.props.children, this.props)}
 			</div>
 		)
