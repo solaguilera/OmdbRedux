@@ -1,13 +1,17 @@
-import React from "react"
+import React from 'react';
+import {Link} from 'react-router';
 
 class SignUpButton extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+	showForm() {
+
+	}
 	render() {
 		return (
 			<div>
-				<button name= 'signup' onClick='' >Sign Up</button>
+				<Link to='signup/'><button name= 'signup'>Sign Up</button></Link>
 			</div>
 		);
 	}

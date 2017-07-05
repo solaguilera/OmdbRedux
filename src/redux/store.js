@@ -1,11 +1,8 @@
-import {createStore, compose, applyMiddleware} from "redux";
+import {createStore, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {syncHistoryWithStore} from "react-router-redux";
-import {hashHistory} from "react-router";
-// import the root reducer
-import rootReducer from "./reducers/index.js";
-
-//create an object for the default data
+import {syncHistoryWithStore} from 'react-router-redux';
+import {hashHistory} from 'react-router';
+import rootReducer from './reducers/index.js';
 
 const defaultState ={
 	movie: {
@@ -14,6 +11,11 @@ const defaultState ={
 	},
 	movies: {
 		movies: [],
+		isFetching: false,
+	},
+	user: {
+		username: null,
+		favorites: [],
 		isFetching: false,
 	}
 };

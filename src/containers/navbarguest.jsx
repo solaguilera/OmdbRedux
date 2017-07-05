@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import SingleMovie from '../components/singleMovie.jsx'; 
+import SingleMovie from '../components/singleMovie.jsx';
 import HomeButton from '../components/homebutton.jsx';
 import SignUpButton from '../components/signupbutton.jsx';
 import Search from '../components/search.jsx';
@@ -19,6 +19,11 @@ function mapsStateToProps (state){
 		movies: {
 			movies: state.movies.movies,
 			isFetching: state.movies.isFetching,
+		},
+		user: {
+			user: state.user.username,
+			favorites: state.user.favorites,
+			isFetching: state.user.isFetching
 		}
 	}
 };
@@ -32,7 +37,7 @@ class NavBarGuest extends React.Component {
 		super(props);
 		this.find=this.find.bind(this)
 	}
-	
+
 	find(peli){
 		this.props.fetchMovies(peli);
 	}
