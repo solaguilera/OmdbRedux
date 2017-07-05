@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {Link, IndexLink} from 'react-router';
+import {Link} from 'react-router';
 import FavButton from './favbutton.jsx';
 
 export default class MoviePreview extends React.Component {
@@ -9,10 +9,14 @@ export default class MoviePreview extends React.Component {
 	render() {
 		return (
 			<div className='moviePreview'>
-				<img src='' alt='' className='previewImg'>
-				<h3 className='previewTitle'></h3><h4 className='previewYear'></h4>
-				<FavButton />
+				<Link to={`singlemovie/${this.props.id}`}>
+					<img src='' className='previewImg' />
+					<h3 className='title'>{this.props.movie}</h3>
+					<h4 className='released'>{this.props.año}</h4>
+					<FavButton />
+				</Link>
 			</div>
+
 		)
 	}
 }

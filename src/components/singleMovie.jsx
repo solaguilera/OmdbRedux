@@ -10,7 +10,7 @@ export default class SingleMovie extends React.Component {
 	render() {
 		return (
 			<div className='singleMovie'>
-				<img src='' alt='' className='previewImg'>
+				<img src='' alt='' className='previewImg' />
 				<h3>Title:</h3><h4 className='singleTitle'></h4>
 				<h3>Year:</h3><h4 className='singleYear'></h4>
 				<h3>Country:</h3><h4 className='singleCountry'></h4>

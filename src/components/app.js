@@ -5,7 +5,14 @@ import Main from "../containers/main.jsx"
 
 function mapsStateToProps (state){
 	return {
-		movie: state.movie,
+		movie: {
+			movie: state.movie.movie,
+			isFetching: state.movie.isFetching,
+		},
+		movies: {
+			movies: state.movies.movies,
+			isFetching: state.movies.isFetching,
+		}
 	}
 };
 

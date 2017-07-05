@@ -6,13 +6,15 @@ import Main from './containers/main.jsx';
 import App from './components/app.js';
 import store, {history} from './redux/store.js';
 import Search from './components/search.jsx';
+import Home from './components/home.jsx'
+import SingleContainer from './containers/singlecontainer.jsx'
 
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
 			<Route path="/" component={App}>
-				<IndexRoute component={Search} />
-				<Route path= '/' />
+				<IndexRoute component={Home} />
+				<Route path= 'singlemovie/:movieId' component= {SingleContainer}/>
 			</Route>
 		</Router>
 	</Provider>, document.getElementById("app"));

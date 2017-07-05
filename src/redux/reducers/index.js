@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
-import movie from './movie.js';
-import movies from'./movies.js';
+import {movie, movies} from './movie.js';
+
 
 const rootReducer = combineReducers ({movie, movies, routing: routerReducer});
 

@@ -27,26 +27,28 @@ function mapDispachToProps (dispatch){
 		return bindActionCreators(actionCreators, dispatch);
 	}
 
-class NavBarGuest extends React.Component {
+class SingleContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		this.find=this.find.bind(this)
 	}
 	
-	find(peli){
-		this.props.fetchMovies(peli);
+	// getOne({this.props.params.movieId}){
+	// 	this.props.fetchMovie(this.props.params.movieId)
+	// }
+	componentWillMount() {
+		console.log(this.props.params.movieId)
+			this.props.fetchMovie(this.props.params.movieId)
 	}
 
 	render() {
+		if(this.props.movie.movie){
 		return (
-			<div className='navbarGuest'>
-				<HomeButton />
-				<Search busqueda= {this.find} />
-				<SignInButton />
-				<SignUpButton />
+			<div>
+				<SingleMovie detail={this.props.movie.movie}/>
 			</div>
-		);
+		)}
+		else{return <p>Loading</p>};
 	}
 }
 
-export default connect(mapsStateToProps, mapDispachToProps)(NavBarGuest);
+export default connect(mapsStateToProps, mapDispachToProps)(SingleContainer);
