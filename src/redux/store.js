@@ -8,8 +8,14 @@ import rootReducer from "./reducers/index.js";
 //create an object for the default data
 
 const defaultState ={
-	movie: [],
-	isFetching: false,
+	movie: {
+		movie: [],
+		isFetching: false,
+	},
+	movies: {
+		movies: [],
+		isFetching: false,
+	}
 };
 
 const store = createStore(rootReducer, defaultState, compose(

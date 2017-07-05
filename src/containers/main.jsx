@@ -9,9 +9,8 @@ class Main extends React.Component{
 	render(){
 		return(
 			<div>
-				<NavBarGuest />
-				<Home />
-				{React.cloneElement(this.props.children, this.props)}
+				<NavBarGuest  />
+				{this.props.children}
 			</div>
 		)
 	}

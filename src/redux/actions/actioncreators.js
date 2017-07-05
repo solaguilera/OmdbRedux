@@ -2,12 +2,13 @@ export const GET_MOVIES= 'GET_MOVIES';
 export function getMovies(movies){
 	return{
 		type: GET_MOVIES,
-		movies
+		isFetching:true
 	}
 };
 export const RECEIVE_MOVIES= 'RECEIVE_MOVIES';
 export function receiveMovies(movies){
-	return{
+	console.log("action receiveMovies", movies)
+	return {
 		type: RECEIVE_MOVIES,
 		movies
 	}
@@ -47,7 +48,8 @@ export function addfav (movie){
 export function fetchMovies(movies){
 	return(dispatch) => {
 		dispatch(getMovies(movies));
-		return fetch(`http://www.omdbapi.com/?apikey= 20dac387&s=${title}`).then(response => response.json())
+		return fetch(`http://www.omdbapi.com/?apikey=20dac387&s=${movies}`)
+			.then(response => response.json())
 			.then(data => dispatch(receiveMovies(data)))
 			.catch(err=> dispatch(failedToFetch(err)));
 	}
@@ -56,7 +58,7 @@ export function fetchMovies(movies){
 export function fetchMovie(movie){
 	return(dispatch) => {
 		dispatch(getMovie(movie));
-		return fetch (`http://www.omdbapi.com/?apikey= 20dac387&i=${movieId}`)
+		return fetch (`http://www.omdbapi.com/?apikey=20dac387&i=${movie}`)
 			.then(response => response.json())
 			.then(data => dispatch(receiveMovie(data)))
 			.catch(err=> dispatch(failedToFetch(err)));

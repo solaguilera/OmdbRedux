@@ -7,7 +7,7 @@ class HomeButton extends React.Component {
 	}
 	render() {
 		return (
-			<Link to=''>Home</Link>
+			<Link to='/'>Home</Link>
 		);
 	}
 }
