@@ -9,20 +9,24 @@ export function user(state={
 	case LOGIN:
 		return Object.assign({}, state,{
 			isFetching: true,
+			isLoggedIn: false,
 		});
 	case LOGUEADO:
 		return Object.assign({}, state, {
 			isFetching: false,
+			isLoggedIn: true,
 			user: action.user,
 			favorites: action.favorites,
 		});
 	case LOGOUT:
 		return Object.assign({}, state, {
-			isFetching: false,
+			isFetching: true,
+			isLoggedIn: true,
 		});
 	case DESLOGUEADO:
 		return Object.assign({}, state, {
 			isFetching: false,
+			isLoggedIn: false,
 		});
 	default:
 		return state;

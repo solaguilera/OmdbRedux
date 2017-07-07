@@ -9,6 +9,7 @@ import Search from './components/search.jsx';
 import Home from './components/home.jsx';
 import SingleContainer from './containers/singlecontainer.jsx';
 import SignUp from './containers/signup.jsx';
+import SignIn from './containers/signin.jsx';
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.render(
 				<IndexRoute component={Home} />
 				<Route path= 'singlemovie/:movieId' component= {SingleContainer}/>
 				<Route path= 'signup/' component= {SignUp} />
+				<Route path= 'signin/' component= {SignIn} />
 			</Route>
 		</Router>
 	</Provider>, document.getElementById("app"));

@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from '../components/home.jsx';
 import {Link} from 'react-router';
-import SignUpForm from '../components/signupForm.jsx';
+import SignInForm from '../components/signinForm.jsx';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../redux/actions/actioncreators.js";
@@ -19,7 +19,8 @@ function mapsStateToProps (state){
 		user: {
 			user: state.user.username,
 			favorites: state.user.favorites,
-			isFetching: state.user.isFetching
+			isFetching: state.user.isFetching,
+			isLoggedIn: state.user.isLoggedIn,
 		}
 	};
 }
@@ -27,21 +28,28 @@ function mapDispachToProps (dispatch){
 	return bindActionCreators(actionCreators, dispatch);
 }
 
-class Signup extends React.Component {
+class Signin extends React.Component {
 	constructor(props) {
 		super(props);
-		this.create=this.create.bind(this)
+
 	}
-	create(registro) {
-		this.props.createUser(registro);
-	}
+	// componentWillMount() {
+	// 	console.log(this.props)
+	// }
+	// signinFetch(entrarAdentro) {
+	// 	this.props.signIn(entrarAdentro);
+	// }
 		render() {
+			// if (this.props.user.isLoggedIn) {
+			// 	return(<div><h1>hola</h1></div>)
+			// } else{
 			return (
-				<div className='signupContainer'>
-					<SignUpForm create={this.create}/>
+				<div className='signinContainer'>
+					<SignInForm signinFetch={this.props.signIn}/>
 				</div>
 			);
+			// }
 		}
 }
 
-export default connect(mapsStateToProps, mapDispachToProps)(Signup);
+export default connect(mapsStateToProps, mapDispachToProps)(Signin);

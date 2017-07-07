@@ -6,7 +6,6 @@ export function register() {
 		type: REGISTER,
 	};
 }
-
 export const REGISTRADO = 'REGISTRADO';
 export function registrado(user) {
 	return {
@@ -14,7 +13,13 @@ export function registrado(user) {
 		user
 	};
 }
-
+export const FAILED_TO_REGISTER= 'FAILED_TO_REGISTER';
+export function failedToRegister(err){
+	return{
+		type: FAILED_TO_REGISTER,
+		err
+	};
+}
 export const LOGIN = 'LOGIN';
 export function login() {
 	return {
@@ -26,6 +31,13 @@ export function logueado(user) {
 	return {
 		type: LOGUEADO,
 		user
+	};
+}
+export const FAILED_TO_LOGIN= 'FAILED_TO_LOGIN';
+export function failedToLogin(err){
+	return{
+		type: FAILED_TO_LOGIN,
+		err
 	};
 }
 export const LOGOUT = 'LOGOUT';
@@ -40,7 +52,13 @@ export function deslogueado() {
 		type: DESLOGUEADO,
 	};
 }
-
+export const FAILED_TO_LOGOUT= 'FAILED_TO_LOGOUT';
+export function failedToLogout(err){
+	return{
+		type: FAILED_TO_LOGOUT,
+		err
+	};
+}
 export const GET_MOVIES= 'GET_MOVIES';
 export function getMovies(){
 	return{
@@ -111,16 +129,40 @@ export function fetchMovie(movie){
 export function createUser(user){
 	return(dispatch) => {
 		dispatch(register(user));
-		return fetch('/signup', {
+		return fetch('http://localhost:8080/users/signup', {
 			method: 'POST',
 			headers: {
-				'Accept':'application/json',
-				'Content-Type':'application/json',
+				"Accept":"application/json",
+				"Content-Type":"application/json",
 			},
-			body: JSON.strigify(user)
+			body: JSON.stringify(user)
 		})
 		.then(response => response.json())
 		.then(data => dispatch(logueado(data)));
 	};
 }
 //////////
+export function signIn(user) {
+	return (dispatch) => {
+		dispatch(login(user));
+		return fetch('http://localhost:8080/users/signin',{
+			method: 'POST',
+			credentials: 'Include',
+			headers: {
+				"Accept":"application/json",
+				"Content-Type":"application/json",
+			},
+			body: JSON.stringify(user)
+		})
+		.then(response => response.json())
+		.then( data => {
+			if (data.succes) {
+				console.log(data, 'then de fetch');
+				dispatch(logueado(data.username));
+			} else {
+				console.log(data, 'else de fetch')
+				dispatch(failedToLogin());
+			}
+		});
+	};
+}

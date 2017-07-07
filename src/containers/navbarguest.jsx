@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import SingleMovie from '../components/singleMovie.jsx';
+import GoToFav from '../components/goToFav.jsx';
 import HomeButton from '../components/homebutton.jsx';
 import SignUpButton from '../components/signupbutton.jsx';
 import Search from '../components/search.jsx';
@@ -23,7 +24,8 @@ function mapsStateToProps (state){
 		user: {
 			user: state.user.username,
 			favorites: state.user.favorites,
-			isFetching: state.user.isFetching
+			isFetching: state.user.isFetching,
+			isLoggedIn: state.user.isLoggedIn,
 		}
 	}
 };
@@ -43,14 +45,25 @@ class NavBarGuest extends React.Component {
 	}
 
 	render() {
-		return (
-			<div className='navbarGuest'>
-				<HomeButton />
-				<Search busqueda= {this.find} />
-				<SignInButton />
-				<SignUpButton />
-			</div>
-		);
+		if (!this.props.user.isLoggedIn) {
+			return (
+				<div className='navbarGuest'>
+					<HomeButton />
+					<Search busqueda= {this.find} />
+					<SignInButton />
+					<SignUpButton />
+				</div>
+			)
+		} else {
+			return (
+				<div className='navbarUser'>
+					<HomeButton />
+					<Search busqueda= {this.find} />
+					<GoToFav />
+					<SignOutButton />
+				</div>
+			)
+		}
 	}
 }
 

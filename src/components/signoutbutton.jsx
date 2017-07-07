@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import {Link} from 'react-router';
 
 class SignOutButton extends React.Component {
 	constructor(props) {
@@ -7,7 +8,7 @@ class SignOutButton extends React.Component {
 	render() {
 		return (
 			<div>
-				<button name= 'signout' onClick=''>Sign Out</button>
+			<Link to='/'><button name= 'signout' onClick=''>Sign Out</button></Link>
 			</div>
 		);
 	}

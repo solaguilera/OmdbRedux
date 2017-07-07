@@ -17,6 +17,7 @@ const defaultState ={
 		username: null,
 		favorites: [],
 		isFetching: false,
+		isLoggedIn: false,
 	}
 };
 

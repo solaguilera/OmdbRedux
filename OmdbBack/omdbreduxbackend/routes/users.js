@@ -3,24 +3,53 @@ var router = express.Router();
 var user = require('../models/User.js');
 var passport = require ('passport');
 
-router.post('/signup', (req, res) => {
-	user.create({
-		username: req.body.signupUser,
-		password: req.body.singupPassword,
-		email: req.body.singupEmail,
-	}, function (err, user) {
-		console.log(err, user);
-		res.send(err ? err : user);
+//SIGNUP
+router.post('/signup', function (req, res) {
+	var newUser = new user({ username: req.body.username, email: req.body.email });
+	user.register(newUser, req.body.password, function (err, user) {
+		if (err) {
+			return res.send({error:"hubo un error durante el registro"});
+		}
+		res.send({"Se creó el usuario":user.username});
 	});
 });
 
-router.post('/signin', passport.authenticate('local', {
-}), function (req, res) {res.send(req);
+//SIGNIN
+router.post('/signin', passport.authenticate('local'), function(req, res) {
+	console.log('user',req.user)
+	if(req.isAuthenticated()) {
+		return res.send({
+			err: null,
+			user: req.user.username,
+			favorites: req.user.favorites,
+			succes: true
+		});
+	}
+	return res.send({
+		err: 'algo salio mal',
+		user: null,
+		succes: false
+	})
+
 });
 
-router.post('/logout', function (req, res) {
-	req.logOut();
-	res.send(200);
+//SIGNOUT
+router.get('/signout', function(req, res){
+	req.logout();
+	res.send({bien:"Deslogeado"});
+});
+
+//AUTH Middleware
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+	return res.send({nope:"unauthorized"});
+}
+
+//FAVORITES
+router.get('/favorites', isLoggedIn, function(req, res) {
+	res.json({favorites : user.favorites});
 });
 
 module.exports = router;
