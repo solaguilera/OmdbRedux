@@ -6,6 +6,7 @@ import HomeButton from '../components/homebutton.jsx';
 import SignUpButton from '../components/signupbutton.jsx';
 import Search from '../components/search.jsx';
 import SignInButton from '../components/signinbutton.jsx';
+import SignOutButton from '../components/signoutbutton.jsx';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../redux/actions/actioncreators.js";
@@ -22,7 +23,7 @@ function mapsStateToProps (state){
 			isFetching: state.movies.isFetching,
 		},
 		user: {
-			user: state.user.username,
+			username: state.user.username,
 			favorites: state.user.favorites,
 			isFetching: state.user.isFetching,
 			isLoggedIn: state.user.isLoggedIn,
@@ -45,6 +46,7 @@ class NavBarGuest extends React.Component {
 	}
 
 	render() {
+		// console.log(this.props.user.username)
 		if (!this.props.user.isLoggedIn) {
 			return (
 				<div className='navbarGuest'>
@@ -59,8 +61,9 @@ class NavBarGuest extends React.Component {
 				<div className='navbarUser'>
 					<HomeButton />
 					<Search busqueda= {this.find} />
+					<span>{this.props.user.username}</span>
 					<GoToFav />
-					<SignOutButton />
+					<SignOutButton signOutFetch= {this.props.signOut}/>
 				</div>
 			)
 		}

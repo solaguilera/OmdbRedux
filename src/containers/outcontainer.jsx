@@ -1,7 +1,12 @@
+import React from 'react';
+import Home from '../components/home.jsx';
+import {Link} from 'react-router';
+import SignInForm from '../components/signinForm.jsx';
+import Favorites from '../components/favorites.jsx';
+import MoviePreview from '../components/moviePreview.jsx';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../redux/actions/actioncreators.js";
-import Main from "../containers/main.jsx"
 
 function mapsStateToProps (state){
 	return {
@@ -14,18 +19,28 @@ function mapsStateToProps (state){
 			isFetching: state.movies.isFetching,
 		},
 		user: {
-			username: state.user.username,
+			user: state.user.username,
 			favorites: state.user.favorites,
 			isFetching: state.user.isFetching,
 			isLoggedIn: state.user.isLoggedIn,
 		}
-	}
-};
-
+	};
+}
 function mapDispachToProps (dispatch){
 	return bindActionCreators(actionCreators, dispatch);
 }
 
-const App= connect(mapsStateToProps, mapDispachToProps)(Main);
+class SignOut extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	render() {
+		return (
+			<div>
+				<Home />
+			</div>
+		)
+	}
+}
 
-export default App;
+export default connect(mapsStateToProps, mapDispachToProps)(SignOut);

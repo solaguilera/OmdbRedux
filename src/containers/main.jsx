@@ -6,6 +6,9 @@ class Main extends React.Component{
 	constructor(props){
 		super(props);
 	}
+	componentWillMount(){
+		this.props.persistencia()
+	}
 	render(){
 		return(
 			<div>

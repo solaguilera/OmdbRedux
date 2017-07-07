@@ -3,6 +3,21 @@ var router = express.Router();
 var user = require('../models/User.js');
 var passport = require ('passport');
 
+//req.isAuthenticated(); // true o false
+//req.user;
+
+//Persistencia
+router.get('/'), function (req, res) {
+	if(req.isAuthenticated()){
+		return res.send({
+			err: null,
+			user: req.user.username,
+			favorites: req.user.favorites,
+			success: true
+		});
+	}
+};
+
 //SIGNUP
 router.post('/signup', function (req, res) {
 	var newUser = new user({ username: req.body.username, email: req.body.email });
@@ -22,21 +37,27 @@ router.post('/signin', passport.authenticate('local'), function(req, res) {
 			err: null,
 			user: req.user.username,
 			favorites: req.user.favorites,
-			succes: true
+			success: true
 		});
 	}
 	return res.send({
 		err: 'algo salio mal',
 		user: null,
-		succes: false
+		success: false
 	})
 
 });
 
 //SIGNOUT
-router.get('/signout', function(req, res){
+router.post('/signout', function(req, res){
+	// hay que borrar la cookie
 	req.logout();
-	res.send({bien:"Deslogeado"});
+	req.session.destroy(function (err) {
+		if(err) return res.send(err);
+		return res.send({
+			success:true,
+		});
+    });
 });
 
 //AUTH Middleware
@@ -49,7 +70,9 @@ function isLoggedIn(req, res, next) {
 
 //FAVORITES
 router.get('/favorites', isLoggedIn, function(req, res) {
-	res.json({favorites : user.favorites});
+	res.json({
+		favorites : user.favorites,
+	});
 });
 
 module.exports = router;

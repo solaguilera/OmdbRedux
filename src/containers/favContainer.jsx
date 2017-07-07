@@ -3,7 +3,7 @@ import MoviePreview from './moviePreview.jsx'
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../redux/actions/actioncreators.js";
-import Main from "../containers/main.jsx"
+import Favorites from '../components/favorites.jsx';
 
 function mapsStateToProps (state){
 	return {
@@ -14,6 +14,12 @@ function mapsStateToProps (state){
 		movies: {
 			movies: state.movies.movies,
 			isFetching: state.movies.isFetching,
+		},
+		user: {
+			username: state.user.username,
+			favorites: state.user.favorites,
+			isFetching: state.user.isFetching,
+			isLoggedIn: state.user.isLoggedIn,
 		}
 	}
 };
@@ -27,21 +33,23 @@ class FavContainer extends React.Component {
 		super(props);
 	}
 	render() {
-		if( this.props.movies.movies.length === 0){
-			return (
-				<div>
-
+		if (this.props.user.isLoggedIn){	
+			if( this.props.user.favorites.length > 0){
+				return (
+					<div>
+						<Favorites />
+					</div>
+				);
+			} else{
+				return (
+					<div>PASAR PARA ARRIBA. Y ACA ESTE LO DEJO EN SÍ ACA COMO ESTÁ. ESTO HAY QUE REVISARLO!!!!
+					{this.props.movies.movies.map((movie, i) => <MoviePreview {...this.props}  movie = {movie.Title}
+						año = {movie.Year} poster= {movie.Poster} id = {movie.imdbID}
+					 key={i} />)}
 				</div>
-			);
-		} else{
-			return (
-				<div>
-				{this.props.movies.movies.map((movie, i) => <MoviePreview {...this.props}  movie = {movie.Title}
-					año = {movie.Year} poster= {movie.Poster} id = {movie.imdbID}
-				 key={i} />)}
-			</div>
-			)
-		}
+				)
+			}
+		} else {return(<div><h1>YOU SHALL NOT PASS.</h1></div>)}	
 	}
 }
 
