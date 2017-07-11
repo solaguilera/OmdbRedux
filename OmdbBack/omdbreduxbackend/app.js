@@ -17,7 +17,7 @@ var users = require( './routes/users');
 const app = express();
 app.use(allowCrossOrigin);
 
-mongoose.connect('mongodb://localhost/autenticacion');
+mongoose.connect('mongodb://mongo/autenticacion');
 app.set('view engine', 'ejs');
 
 app.set('views', path.join(__dirname, 'views'));
