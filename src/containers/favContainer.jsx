@@ -1,5 +1,5 @@
 import React from "react"
-import MoviePreview from './moviePreview.jsx'
+import MoviePreview from '../components/moviePreview.jsx'
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as actionCreators from "../redux/actions/actioncreators.js";

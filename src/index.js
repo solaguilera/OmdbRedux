@@ -10,7 +10,7 @@ import Home from './components/home.jsx';
 import SingleContainer from './containers/singlecontainer.jsx';
 import SignUp from './containers/signup.jsx';
 import SignIn from './containers/signin.jsx';
-import FavContainer from './containers/favConteiners.jsx';
+import FavContainer from './containers/favContainer.jsx';
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -20,7 +20,7 @@ ReactDOM.render(
 				<Route path= 'singlemovie/:movieId' component= {SingleContainer}/>
 				<Route path= 'signup/' component= {SignUp} />
 				<Route path= 'signin/' component= {SignIn} />
-				<Route path= 'favorites/' component= {FavContainer}
+				<Route path= 'favorites/' component= {FavContainer} />
 			</Route>
 		</Router>
 	</Provider>, document.getElementById("app"));

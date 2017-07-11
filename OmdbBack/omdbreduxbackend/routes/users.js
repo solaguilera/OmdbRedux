@@ -7,7 +7,7 @@ var passport = require ('passport');
 //req.user;
 
 //Persistencia
-router.get('/'), function (req, res) {
+router.get('/', function (req, res) {
 	if(req.isAuthenticated()){
 		return res.send({
 			err: null,
@@ -16,7 +16,8 @@ router.get('/'), function (req, res) {
 			success: true
 		});
 	}
-};
+	res.send({err: "hola"})
+});
 
 //SIGNUP
 router.post('/signup', function (req, res) {

@@ -140,7 +140,7 @@ export function fetchMovie(movie){
 export function createUser(user){
 	return(dispatch) => {
 		dispatch(register(user));
-		return fetch('http://localhost:8080/users/signup', {
+		return fetch('./api/users/signup', {
 			method: 'POST',
 			headers: {
 				"Accept":"application/json",
@@ -156,7 +156,7 @@ export function createUser(user){
 export function signIn(user) {
 	return (dispatch) => {
 		dispatch(login(user));
-		return fetch('http://localhost:8080/users/signin',{
+		return fetch('./api/users/signin',{
 			method: 'POST',
 			credentials: 'include',
 			headers: {
@@ -180,7 +180,7 @@ export function signIn(user) {
 export function signOut(user){
 	return (dispatch) => {
 		dispatch(logout(user));
-		return fetch('http://localhost:8080/users/signout', {
+		return fetch('./api/users/signout', {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
@@ -197,7 +197,7 @@ export function signOut(user){
 export function persistencia(user) {
 	return (dispatch) => {
 		dispatch(login(user));
-		return fetch('http://localhost:8080/users',{
+		return fetch('./api/users',{
 			method: 'GET',
 			credentials: 'include',
 			headers: {
@@ -222,7 +222,7 @@ export function persistencia(user) {
 export function favoritos(favorites) {
 	return(dispatch)=> {
 		dispatch(getFavorites(favorites));
-		return fetch ('http://localhost:8080/users/favorites', {
+		return fetch ('./api/users/favorites', {
 			method: 'GET',
 			credentials: 'include',
 			headers: {
@@ -231,13 +231,13 @@ export function favoritos(favorites) {
 			},
 			body: JSON.stringify(favorites)	
 		})
-		.then (response=> response.json())
-		.then(data => {
-			if(data.success) {
-				dispatch(receiveFavorites(data));
-			} else {
-				dispatch(failedToFetch());
-			}
-		});
+			.then (response=> response.json())
+			.then(data => {
+				if(data.success) {
+					dispatch(receiveFavorites(data));
+				} else {
+					dispatch(failedToFetch());
+				}
+			});
 	};
 }

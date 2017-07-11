@@ -15,7 +15,10 @@ var index = require( './routes/index');
 var users = require( './routes/users');
 
 const app = express();
-app.use(allowCrossOrigin);
+app.use(function(req, res, next) {
+	console.log(req.url);
+	next();
+});
 
 mongoose.connect('mongodb://mongo/autenticacion');
 app.set('view engine', 'ejs');
@@ -33,8 +36,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 // app.use(express.session());
 
 app.use(passport.initialize());
@@ -48,23 +49,8 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', index);
 app.use('/users', users);
 
-// Publica
-app.get('/publica', function(req, res) {
-	res.render('publica');
-});
-
-// Privada
-// Usamos el middleware que creamos arriba
-// app.get('/privada', isLoggedIn, function(req, res) {
-// 	res.render('privada');
-// });
-
 app.use(function(err, req, res) {
-	res.locals.message = err.message;
-	res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-	res.status(err.status || 500);
-	res.render('error');
+	res.send('err');
 });
 
 app.listen(8080);
